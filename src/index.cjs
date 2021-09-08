@@ -1,21 +1,17 @@
-import Core from "@alicloud/pop-core";
-import Secretify from "secretify";
-import env from "dotenv";
+const Core = require("@alicloud/pop-core");
+const Secretify = require("secretify");
+require("dotenv").config();
 
-env.config();
 
-export const ALI_SECRET_KEYS = ['accessKeyId', 'accessKeySecret'];
-
-export default class Dns01 {
+module.exports = class Dns01 {
     static propagationDelay
+    static ALI_SECRET_KEYS = ['accessKeyId', 'accessKeySecret'];
     static #client;
     static #requestOption = {method: 'POST'};
 
-    static create(config) {
-        if (!config.hasOwnProperty('secret')) return null;
+    static create(secret, password, propagationDelay = 5000) {
 
-        const password = process.env.SECRETIFY_KEY;
-        const {accessKeyId, accessKeySecret} = Secretify.unseal(config.secret, password, ALI_SECRET_KEYS);
+        const {accessKeyId, accessKeySecret} = Secretify.unseal(secret, password, this.ALI_SECRET_KEYS);
 
         this.#client = new Core({
             accessKeyId,
@@ -24,7 +20,7 @@ export default class Dns01 {
             apiVersion: '2015-01-09',
         });
 
-        this.propagationDelay = config.propagationDelay;
+        this.propagationDelay = propagationDelay;
         return this;
     }
 

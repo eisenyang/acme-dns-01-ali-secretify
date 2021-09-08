@@ -3,9 +3,9 @@
 AliDNS challenger for ACME.js and Greenlock.js, **keeping accessKeyId/Secret security.**
 
 ## Why
-Greenlock.js save challenger config in plain json by default.
+Greenlock.js save challenger's config in plain json by default.
 
-This for keeping the AliDNS's accessKeyId/Secret encrypt with AES. 
+This for keeping the AliDNS's accessKeyId/Secret secure. 
 
 ## Install
 
@@ -35,7 +35,7 @@ greenlock.manager.defaults({
   challenges: {
     'dns-01': {
       module: 'acme-dns-01-ali-secretify',
-      secret: 'yout secretString'
+      secret: 'your secretString'
     },
   },
 });
@@ -85,5 +85,5 @@ SECRETIFY_KEY='VeryStrongPassword'
 ```
 
 ```bash
-node test/test.mjs
+node test/test.cjs
 ```

@@ -1,11 +1,10 @@
-import tester from "acme-challenge-test";
-import env from "dotenv";
-import Dns01 from "../src/index.mjs";
-
-env.config();
+const Dns01 = require("../src/index.cjs");
+const tester = require("acme-challenge-test");
+require("dotenv").config();
 
 const zone = process.env.ZONE;
-const challenger = Dns01.create({secret: process.env.SECRET});
+
+const challenger = Dns01.create(process.env.SECRET, process.env.SECRETIFY_KEY);
 
 tester
     .testZone('dns-01', zone, challenger)

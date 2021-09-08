@@ -1,19 +1,20 @@
 #!/usr/bin/env node
 import Secretify from "secretify";
-import {ALI_SECRET_KEYS} from "./index.mjs";
+import Dns0 from "./index.cjs";
 import readlineSync from "readline-sync";
 import env from 'dotenv';
 
 env.config();
 
 const secretObj = {};
-if (process.argv.length < 4) {
-    for (const secretKey of ALI_SECRET_KEYS) {
+const len = process.argv.length;
+if (len < 4) {
+    for (const secretKey of Dns0.ALI_SECRET_KEYS) {
         secretObj[secretKey] = readlineSync.question(secretKey + ": ");
     }
 } else {
-    secretObj[ALI_SECRET_KEYS[0]] = process.argv[2];
-    secretObj[ALI_SECRET_KEYS[1]] = process.argv[3];
+    secretObj[Dns0.ALI_SECRET_KEYS[0]] = process.argv[len - 1];
+    secretObj[Dns0.ALI_SECRET_KEYS[1]] = process.argv[len];
 }
 
 console.log('Secret Object:', secretObj);
