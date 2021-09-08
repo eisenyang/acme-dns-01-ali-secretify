@@ -1,0 +1,33 @@
+{
+  "name": "acme-dns-01-ali-secretify",
+  "version": "0.1.0",
+  "description": "",
+  "main": "src/index.mjs",
+  "scripts": {
+    "test": "node test/test.mjs",
+    "makeSecret": "node src/makeSecret.mjs"
+  },
+  "bin": {
+    "makeSecret": "src/makeSecret.mjs"
+  },
+  "keywords": [
+    "greenlock",
+    "acme",
+    "challenge",
+    "ali",
+    "aliDNS",
+    "encrypt",
+    "secret"
+  ],
+  "author": "eisen.yang@gmail.com",
+  "license": "ISC",
+  "dependencies": {
+    "@alicloud/pop-core": "^1.7.10",
+    "readline-sync": "^1.4.10",
+    "secretify": "^0.1.1",
+    "dotenv": "^10.0.0"
+  },
+  "devDependencies": {
+    "acme-challenge-test": "^3.3.2"
+  }
+}
