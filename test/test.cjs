@@ -4,7 +4,7 @@ require("dotenv").config();
 
 const zone = process.env.ZONE;
 
-const challenger = Dns01.create(process.env.SECRET, process.env.SECRETIFY_KEY);
+const challenger = Dns01.create({secret: process.env.SECRET});
 
 tester
     .testZone('dns-01', zone, challenger)

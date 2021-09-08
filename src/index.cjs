@@ -2,16 +2,16 @@ const Core = require("@alicloud/pop-core");
 const Secretify = require("secretify");
 require("dotenv").config();
 
-
 module.exports = class Dns01 {
     static propagationDelay
     static ALI_SECRET_KEYS = ['accessKeyId', 'accessKeySecret'];
     static #client;
     static #requestOption = {method: 'POST'};
 
-    static create(secret, password, propagationDelay = 5000) {
-
-        const {accessKeyId, accessKeySecret} = Secretify.unseal(secret, password, this.ALI_SECRET_KEYS);
+    static create(config) {
+        const {secret, propagationDelay} = config;
+        const {accessKeyId, accessKeySecret}
+            = Secretify.unseal(secret, process.env.SECRETIFY_KEY, this.ALI_SECRET_KEYS);
 
         this.#client = new Core({
             accessKeyId,
